@@ -17,23 +17,28 @@
 </div>
 
 <div class="games">
-    <div class="game">
-        <div class="game-thumb-container">
-            <img
-                class="game-thumbnail"
-                src="https://i.pinimg.com/736x/64/d2/51/64d251e8d1a9dc544cefe64b51b6b4c3.jpg"
-                alt="thumbnail"
-            />
-        </div>
-        <div class="description">
-            <p class="game-name">Name</p>
-            <div class="game-platforms">
-                <img 
-                    src="https://i.pinimg.com/736x/1f/73/b4/1f73b47603cea825454a1f8399b7fd0a.jpg" 
-                    alt="slug" 
-                    class="game-platform" 
+    <ng-container *ngFor="let game of games">
+        <div class="game">
+            <div class="game-thumb-container">
+                <img
+                    *ngIf="game.background_image"
+                    class="game-thumbnail"
+                    src="{{ game.background_image }}"
+                    alt="thumbnail"
                 />
+                <p *ngIf="!game.background_image">No image</p>
+            </div>
+            <div class="description">
+                <p class="game-name">{{game.name}}</p>
+                <div class="game-platforms">
+                    <img 
+                        *ngFor="let gamePlatform of game.parent_platforms"
+                        [src]="'assets/images/platforms/' + gamePlatform.platform.slug + '.svg'"
+                        [alt]="gamePlatform.platform.slug" 
+                        class="game-platform" 
+                    />
+                </div>
             </div>
         </div>
-    </div>
+    </ng-container>
 </div>

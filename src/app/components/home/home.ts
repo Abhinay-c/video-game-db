@@ -5,10 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { APIResponse, Game } from '../../models';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Http } from '../../services/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [MatFormFieldModule, MatSelectModule, FormsModule],
+  imports: [MatFormFieldModule, MatSelectModule, FormsModule, CommonModule],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
