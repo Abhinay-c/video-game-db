@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatFormFieldModule  } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { APIResponse, Game } from '../../models';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Http } from '../../services/http';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +12,35 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
-export class Home {
+export class Home implements OnInit {
   public sort: String = '';
+  public games: Array<Game> = [];
+
+  constructor(
+    private httpService : Http,
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      if(params['game-search']) {
+        this.searchGames('metacrit',  params['game-search']);
+      }
+      else {
+        this.searchGames('metacrit');
+      }
+    });
+  }
+
+  searchGames(
+    sort: string,
+    search?: string
+  ) {
+    this.httpService
+      .getGameList(sort, search)
+      .subscribe((gameList: APIResponse<Game>) => {
+        this.games = gameList.results;
+        console.log(gameList);
+      });
+  }
 }
