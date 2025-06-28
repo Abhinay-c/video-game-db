@@ -78,7 +78,8 @@
         color: #fff;
         font-weight: 700;
         font-size: 22px;
-        margin-bottom: 20px;
+        margin-top: 20px;
+        margin-left: 20px;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
@@ -87,7 +88,7 @@
         display: flex;
     }
     &-platform{
-        width: 30px;
-        margin-right: 10px;
+        width: 50px;
+        margin: 20px 0px 0px 20px;
     }
 }
